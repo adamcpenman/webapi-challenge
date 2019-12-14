@@ -16,10 +16,17 @@ Go code!
 const express = require("express")
 const helmet = require("helmet")
 
+const projectsRouter = require('./Projects/projects');
+// const actionsRouter = require('./actions/actionsRouter');
+
 const server = express()
 
 const host = process.env.HOST || "0.0.0.0"
 const port = process.env.PORT || 8080
+
+
+server.use('/api/projects', projectsRouter)
+// server.use('./actions', actionsRouter)
 
 server.use(helmet())
 server.use(express.json())
