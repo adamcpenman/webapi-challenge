@@ -12,3 +12,30 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+const express = require("express")
+const helmet = require("helmet")
+
+const server = express()
+
+const host = process.env.HOST || "0.0.0.0"
+const port = process.env.PORT || 8080
+
+server.use(helmet())
+server.use(express.json())
+
+
+server.get("/", (req, res) => {
+    // console.log("ip:", req.ip)
+    res.send("<h2>Adam's WebPT8 API Challenge Sprint</h3>")
+})
+
+
+server.listen(port, host, () => {
+	console.log(`Running at http://localhost:${port}`)
+})
+
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ message: "internal error." });
+});
