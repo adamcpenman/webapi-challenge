@@ -3,6 +3,7 @@ const express = require('express')
 const actionsDB = require('../data/helpers/actionModel')
 
 const router = express.Router();
+
 router.use(express.json());
 
 router.get('/', (req, res) => {
@@ -36,7 +37,7 @@ router.post('/', (req, res) => {
 
     actionsDB.insert(action)
         .then(actions => {
-            res.status(201).json(actions)
+            res.status(200).json(actions)
         })
         .catch(err => {
             console.log("Error with POST action", err)

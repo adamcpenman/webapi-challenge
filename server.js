@@ -1,14 +1,26 @@
-// const express = require('express');
-// const helmet = require('helmet');
+const express = require("express")
+const helmet = require("helmet")
 
-// const server = express();
+const projectsRouter = require('./Projects/projects');
+const actionsRouter = require('./Actions/action');
+const { logger } = require('./middleware')
 
-// server.use(helmet());
+const server = express()
 
-// server.use(express.json());
 
-// server.get('/'), (req, res) => {
-//     res.send(`<h1>Adam's WebPT8 API Challenge Sprint</h1>`)
-// }
+server.use('/api/projects', projectsRouter)
+server.use('/api/projects/:id/actions', actionsRouter)
 
-// module.exports = server
+server.use(helmet())
+server.use(express.json())
+server.use(logger())
+
+
+server.get("/", (req, res) => {
+    console.log("ip:", req.ip)
+    res.send("<h2>Adam's WebPT8 API Challenge Sprint</h3>")
+})
+
+
+
+module.exports = server
