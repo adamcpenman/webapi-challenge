@@ -17,7 +17,7 @@ const express = require("express")
 const helmet = require("helmet")
 
 const projectsRouter = require('./Projects/projects');
-// const actionsRouter = require('./actions/actionsRouter');
+const actionsRouter = require('./Actions/action');
 
 const server = express()
 
@@ -26,7 +26,7 @@ const port = process.env.PORT || 8080
 
 
 server.use('/api/projects', projectsRouter)
-// server.use('./actions', actionsRouter)
+server.use('/api/projects/:id/actions', actionsRouter)
 
 server.use(helmet())
 server.use(express.json())
