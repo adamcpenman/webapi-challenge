@@ -1,4 +1,5 @@
 const express = require("express")
+const cors = require("cors")
 const helmet = require("helmet")
 
 const projectsRouter = require('./Projects/projects');
@@ -8,15 +9,18 @@ const { logger } = require('./middleware')
 const server = express()
 
 
-server.use('/api/projects', projectsRouter)
-server.use('/api/projects/:id/actions', actionsRouter)
+server.use('/api/projects',cors(), projectsRouter)
+server.use('/api/projects/:id/actions',cors(), actionsRouter)
 
+server.options('*', cors())
+server.use(cors())
 server.use(helmet())
 server.use(express.json())
 server.use(logger())
 
 
-server.get("/", (req, res) => {
+
+server.get("/", cors(), (req, res) => {
     console.log("ip:", req.ip)
     res.send("<h2>Adam's WebPT8 API Challenge Sprint</h3>")
 })
