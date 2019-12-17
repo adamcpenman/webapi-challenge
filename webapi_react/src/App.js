@@ -5,7 +5,7 @@ import PostCard from "./Post"
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <h1>Web-API-Challenge</h1>
       <PostCard/>
     </div>
   );
