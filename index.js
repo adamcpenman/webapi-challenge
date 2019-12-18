@@ -12,3 +12,17 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+require('dotenv').config()
+
+const server = require('./server')
+const host = process.env.HOST || "0.0.0.0"
+const port = process.env.PORT || 8080
+
+server.listen(port, host, () => {
+    console.log(`\n*** Server Running on http://localhost:${port} 👨🏻‍💻`)
+})
+server.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ message: "internal error." });
+});
